@@ -4,4 +4,3 @@ User: Zahur Meerun
 
 - frontend react
 - backend django
-
