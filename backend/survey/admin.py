@@ -1,5 +1,6 @@
-from survey.models import Code, Question, Survey
 from django.contrib import admin
+
+from survey.models import Code, Question, Survey
 
 
 class SurveyAdmin(admin.ModelAdmin):
@@ -7,16 +8,15 @@ class SurveyAdmin(admin.ModelAdmin):
 
 
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = (
-        "created_at",
-        "updated_at",
-    )
+    list_display = ("created_at", "updated_at", "survey")
 
 
 class CodeAdmin(admin.ModelAdmin):
     list_display = (
+        "survey",
         "created_at",
         "updated_at",
+        "code",
     )
 
 
