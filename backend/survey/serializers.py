@@ -3,7 +3,6 @@ Serilizers for Survey
 """
 
 from rest_framework import serializers
-
 from survey.models import Question, Survey
 
 

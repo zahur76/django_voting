@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .api_views import CreateSurvey, ListSurvey, CreateQuestion
+from .api_views import CreateQuestion, CreateSurvey, ListSurvey
 
 urlpatterns = [
     path("create_survey/", CreateSurvey.as_view(), name="create_survey"),

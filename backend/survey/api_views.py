@@ -5,10 +5,8 @@ Views for Survey APIS
 import random
 import string
 
-from drf_spectacular.types import OpenApiTypes
-from drf_spectacular.utils import OpenApiParameter, extend_schema
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
-
 from survey import serializers
 from survey.models import Code, Survey
 
@@ -52,6 +50,9 @@ class ListSurvey(generics.ListAPIView):
 
     queryset = Survey.objects.all()
     serializer_class = serializers.SurveySerializer
+
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ["id"]
 
 
 class CreateQuestion(generics.CreateAPIView):
