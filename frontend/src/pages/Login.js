@@ -3,21 +3,22 @@ import { useAuthServiceContext } from "../context/AuthContext";
 import { useEffect, useState } from "react";
 
 const Login = () => {
-  const navigate = useNavigate();
-  const { login } = useAuthServiceContext();
 
-  const [isLoggedIn] = useState(login());
+    const navigate = useNavigate();
+    const { login } = useAuthServiceContext();
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate("/survey");
-    }
-  }, []);
+    const [isLoggedIn] = useState(login());
 
-  return (
-    <div sx={{ display: "flex" }}>
-      <div className="h1 text-dark text-center montserrat-400">Login Page</div>
-    </div>
-  );
-};
+    useEffect(() => {
+        if(isLoggedIn){
+            navigate("/surveys");
+        }
+      }, []);
+
+    return (
+        <div sx={{ display: "flex" }} >
+            <div className="h1 text-dark text-center montserrat-400">Login Page</div>
+        </div>
+        );
+    };
 export default Login;

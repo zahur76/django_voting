@@ -1,5 +1,6 @@
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import Survey from "./pages/Survey";
 import "./App.css";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import { AuthServiceProvider } from "./context/AuthContext";
@@ -10,8 +11,9 @@ function App() {
     <BrowserRouter>
       <AuthServiceProvider>
         <Routes>
-          <Route path="/survey" element={<Home />} />
+          <Route path="/survey/:id?" element={<Home />} />
           <Route path="/" element={<Login />} />
+          <Route path="/surveys" element={<Survey />} />
         </Routes>
       </AuthServiceProvider>
     </BrowserRouter>
