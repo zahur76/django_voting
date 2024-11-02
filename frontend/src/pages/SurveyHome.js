@@ -44,7 +44,7 @@ const Survey = () => {
             <li key={data.id}>
               <Button
                 variant="link"
-                href={BASE_URL + "survey/?id=" + data.id}
+                href={BASE_URL + "survey/results/?id=" + data.id}
                 rel="noopener noreferrer"
               >
                 {data.title}

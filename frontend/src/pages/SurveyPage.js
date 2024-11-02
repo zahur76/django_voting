@@ -6,9 +6,11 @@ import { useState, useEffect } from "react";
 import useCrud from "../hooks/useCrud";
 import axios from "axios";
 import { BASE_API } from "../config";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [message, setMessage] = useState(null);
+  const navigate = useNavigate();
 
   const queryParameters = new URLSearchParams(window.location.search);
 
@@ -24,18 +26,17 @@ const Home = () => {
   }, []);
 
   const handleSubmit = (values) => {
-
     const userData = {
       vote: values.picked,
       code: values.code,
     };
-    
+
     axios
       .post(`${BASE_API}survey/vote/${survey_id}`, userData)
       .then((response) => {
         if (response.status === 200) {
           console.log(response.status, response.data["detail"]);
-          setMessage(response.data["detail"]);
+          navigate("/thanks");
         }
       })
       .catch((error) => {
@@ -86,12 +87,13 @@ const Home = () => {
                 <Field
                   className="mb-2 me-3 ms-0 mt-2 code"
                   name="code"
-                  placeholder="Secret Code"
+                  placeholder="Enter Secret Code"
                   required
                 />
                 <Button
-                  className="d-flex justify-content-center"
-                  variant="primary"
+                  className="d-flex justify-content-center w-50"
+                  variant="outline-primary"
+                  size="sm"
                   type="submit"
                 >
                   Submit
