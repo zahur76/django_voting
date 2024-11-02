@@ -1,23 +1,40 @@
 import json
 
-from django.shortcuts import render
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
+
+from survey.models import Code, Question, Survey
 
 
-# Create your views here.
-@api_view(["POST"])
 @csrf_exempt
 def survey_vote(request, survey_id):
     if request.method == "POST":
-        print(survey_id)
+
         data = json.loads(request.body)
 
-        print(data)
+        survey = Survey.objects.filter(id=survey_id).first()
 
-        d = {"message": "Hello JsonResponse"}
+        # voting logic
+        # check code exists
 
-        # JsonResponse
-        return Response({"detail": "Voted successfully."}, status=status.HTTP_200_OK)
+        try:
+            code = Code.objects.get(code=data["code"], survey=survey)
+        except Code.DoesNotExist:
+            return JsonResponse(
+                {"status": "false", "detail": {"detail": "Code not found"}},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        # Updcate Suvey results and delete code
+
+        question = Question.objects.filter(survey=survey, id=data["vote"]).first()
+        question.votes += 1
+        question.save()
+        code.delete()
+
+        return JsonResponse(
+            {"status": "false", "detail": "Thanks for voting"},
+            status=status.HTTP_200_OK,
+        )

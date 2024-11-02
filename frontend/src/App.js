@@ -1,6 +1,6 @@
-import Home from "./pages/Home";
+import Home from "./pages/SurveyPage";
 import Login from "./pages/Login";
-import Survey from "./pages/Survey";
+import Survey from "./pages/SurveyHome";
 import "./App.css";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import { AuthServiceProvider } from "./context/AuthContext";

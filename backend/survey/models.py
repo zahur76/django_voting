@@ -2,6 +2,7 @@ import random
 import string
 
 from django.db import models
+
 from voting_app.base.models import BaseModel
 
 

@@ -2,7 +2,10 @@
 Serilizers for Survey
 """
 
+from typing import Dict
+
 from rest_framework import serializers
+
 from survey.models import Question, Survey
 
 
@@ -11,7 +14,7 @@ class SurveySerializer(serializers.ModelSerializer):
 
     questions = serializers.SerializerMethodField("survey_questions")
 
-    def survey_questions(self, serializer):
+    def survey_questions(self, serializer) -> Dict[str, str]:
         """Return questions for the survey"""
         return QuestionSerializer(
             Question.objects.filter(survey=serializer).all(), many=True

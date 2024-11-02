@@ -8,7 +8,7 @@ import axios from "axios";
 import { BASE_API } from "../config";
 
 const Home = () => {
-  const [message, setMessage] = useState("Feed Back Message");
+  const [message, setMessage] = useState(null);
 
   const queryParameters = new URLSearchParams(window.location.search);
 
@@ -24,21 +24,24 @@ const Home = () => {
   }, []);
 
   const handleSubmit = (values) => {
-    console.log(values);
 
     const userData = {
       vote: values.picked,
       code: values.code,
     };
+    
     axios
       .post(`${BASE_API}survey/vote/${survey_id}`, userData)
       .then((response) => {
-        console.log(response.status, response.data["detail"]);
-        setMessage(response.data["detail"]);
+        if (response.status === 200) {
+          console.log(response.status, response.data["detail"]);
+          setMessage(response.data["detail"]);
+        }
       })
       .catch((error) => {
-        console.log(error);
-        setMessage("Error!");
+        if (error.status === 400) {
+          setMessage("Code Not Found");
+        }
       });
   };
 
@@ -46,8 +49,8 @@ const Home = () => {
     <div>
       <div className="h1 text-dark text-center montserrat-400">Survey Page</div>
       {dataCRUD.map((data, index) => (
-        <div className="text-center h2" key={index}>
-          {data.title}
+        <div className="text-center h2 text-primary" key={index}>
+          {data.title.toUpperCase()}
         </div>
       ))}
       <Formik
