@@ -1,13 +1,13 @@
 from django.contrib import admin
 
-from survey.models import Code, Question, Survey
+from survey.models import Code, Option, Survey
 
 
 class SurveyAdmin(admin.ModelAdmin):
     list_display = ("created_at", "updated_at", "title")
 
 
-class QuestionAdmin(admin.ModelAdmin):
+class OptionAdmin(admin.ModelAdmin):
     list_display = ("created_at", "updated_at", "survey")
 
 
@@ -22,5 +22,5 @@ class CodeAdmin(admin.ModelAdmin):
 
 # The model followed by class name (model, class name)
 admin.site.register(Survey, SurveyAdmin)
-admin.site.register(Question, QuestionAdmin)
+admin.site.register(Option, OptionAdmin)
 admin.site.register(Code, CodeAdmin)

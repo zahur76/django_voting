@@ -4,15 +4,15 @@ Owner: Zahur Meerun
 
 ## PROJECT SUMMARY
 
-An anonymous survey system making use of 4 letter code for authentification per voter.
+An anonymous voting system making use of 4 letter code for authentification per voter.
 
-Signed in users can create survey and specify how many voters they required and add questions to the survey.
+Signed in users can create a survey and specify how many voters they required and add options to the survey.
 
 # PROJECT REQUIREMENTS
 
-- have a login system for admin users to create survey and questions.
+- have a login system for admin users to create survey and options.
 - have the ability for admin to create survey.
-- have the ability to add questions to the survey.
+- have the ability to add options to the survey.
 - have the ability for admin to specify how many voters are required.
 - generate a random 4 letter code to allow users to vote.
 - allow users to vote anonymously using a generated code.

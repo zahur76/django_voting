@@ -6,18 +6,18 @@ from typing import Dict
 
 from rest_framework import serializers
 
-from survey.models import Question, Survey
+from survey.models import Option, Survey
 
 
 class SurveySerializer(serializers.ModelSerializer):
     """Serializer for Survey"""
 
-    questions = serializers.SerializerMethodField("survey_questions")
+    options = serializers.SerializerMethodField("survey_questions")
 
     def survey_questions(self, serializer) -> Dict[str, str]:
-        """Return questions for the survey"""
-        return QuestionSerializer(
-            Question.objects.filter(survey=serializer).all(), many=True
+        """Return options for the survey"""
+        return OptionSerializer(
+            Option.objects.filter(survey=serializer).all(), many=True
         ).data
 
     class Meta:
@@ -27,20 +27,20 @@ class SurveySerializer(serializers.ModelSerializer):
             "title",
             "description",
             "voters",
-            "questions",
+            "options",
         )
         read_only_fields = ["id"]
 
 
-class QuestionSerializer(serializers.ModelSerializer):
-    """Serializer for Questions"""
+class OptionSerializer(serializers.ModelSerializer):
+    """Serializer for Options"""
 
     class Meta:
-        model = Question
+        model = Option
         fields = (
             "id",
             "survey",
-            "question",
+            "option",
             "votes",
         )
         read_only_fields = ["id"]

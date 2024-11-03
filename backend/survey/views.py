@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
 
-from survey.models import Code, Question, Survey
+from survey.models import Code, Option, Survey
 
 
 @csrf_exempt
@@ -29,9 +29,9 @@ def survey_vote(request, survey_id):
 
         # Updcate Suvey results and delete code
 
-        question = Question.objects.filter(survey=survey, id=data["vote"]).first()
-        question.votes += 1
-        question.save()
+        option = Option.objects.filter(survey=survey, id=data["vote"]).first()
+        option.votes += 1
+        option.save()
         code.delete()
 
         return JsonResponse(

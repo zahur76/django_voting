@@ -56,10 +56,10 @@ class ListSurvey(generics.ListAPIView):
     filterset_fields = ["id"]
 
 
-class CreateQuestion(generics.CreateAPIView):
+class CreateOption(generics.CreateAPIView):
     """
     View to Create and Question
 
     """
 
-    serializer_class = serializers.QuestionSerializer
+    serializer_class = serializers.OptionSerializer

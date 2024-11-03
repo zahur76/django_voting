@@ -29,16 +29,16 @@ class Survey(BaseModel):
         return self.title
 
 
-class Question(BaseModel):
+class Option(BaseModel):
     """
-    Questions Model for Survey
+    Model to add options to survey
     """
 
     class Meta:
-        verbose_name_plural = "Question"
+        verbose_name_plural = "Option"
 
     survey = models.ForeignKey(Survey, on_delete=models.CASCADE)
-    question = models.CharField(max_length=255)
+    option = models.CharField(max_length=255)
     votes = models.IntegerField(default=0)
 
     def __str__(self):

@@ -18,7 +18,7 @@ const Home = () => {
 
   const { dataCRUD, error, isloading, fetchData } = useCrud(
     [],
-    `/survey/list_survey/?id=${survey_id}`
+    `/api/survey/list_survey/?id=${survey_id}`
   );
 
   useEffect(() => {
@@ -35,7 +35,6 @@ const Home = () => {
       .post(`${BASE_API}survey/vote/${survey_id}`, userData)
       .then((response) => {
         if (response.status === 200) {
-          console.log(response.status, response.data["detail"]);
           navigate("/thanks");
         }
       })
@@ -49,11 +48,13 @@ const Home = () => {
   return (
     <div>
       <div className="h1 text-dark text-center montserrat-400">Survey Page</div>
-      {dataCRUD.map((data, index) => (
-        <div className="text-center h2 text-primary" key={index}>
-          {data.title.toUpperCase()}
-        </div>
-      ))}
+      {dataCRUD &&
+        dataCRUD.map((data, index) => (
+          <div className="text-center h2 text-primary" key={index}>
+            {data.title.toUpperCase()}
+            <div className="h5 text-dark mt-3"> {data.description} </div>
+          </div>
+        ))}
       <Formik
         initialValues={{
           code: "",
@@ -65,20 +66,20 @@ const Home = () => {
           <Row>
             <Col xs="0" md="3" lg="4"></Col>
             <Col xs="12" md="6" lg="4">
-              <Form className="p-5 radio-button">
-                {dataCRUD.map((data, index) => (
+              <Form className="p-5 pt-2 radio-button">
+                {dataCRUD?.map((data, index) => (
                   <div key={index}>
-                    {data.questions.map((question, iter) => (
+                    {data.options.map((option, iter) => (
                       <div key={iter}>
                         <label>
                           <Field
-                            id={`${question.id}`}
+                            id={`${option.id}`}
                             type="radio"
                             name="picked"
-                            value={`${question.id}`}
+                            value={`${option.id}`}
                             required
                           />
-                          {`${question.question}`}
+                          {`${option.option}`}
                         </label>
                       </div>
                     ))}
@@ -105,7 +106,6 @@ const Home = () => {
         )}
       </Formik>
       <div className="text-center">{message}</div>
-      <ul></ul>
     </div>
   );
 };
