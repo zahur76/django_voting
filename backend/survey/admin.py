@@ -4,7 +4,7 @@ from survey.models import Code, Option, Survey
 
 
 class SurveyAdmin(admin.ModelAdmin):
-    list_display = ("created_at", "updated_at", "title")
+    list_display = ("created_at", "id", "updated_at", "title")
 
 
 class OptionAdmin(admin.ModelAdmin):

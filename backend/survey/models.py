@@ -1,6 +1,7 @@
 import random
 import string
 
+from django.contrib.auth.models import User
 from django.db import models
 
 from voting_app.base.models import BaseModel
@@ -21,6 +22,7 @@ class Survey(BaseModel):
     class Meta:
         verbose_name_plural = "Survey"
 
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="survey")
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     voters = models.IntegerField(default=0)
