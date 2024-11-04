@@ -1,29 +1,45 @@
-import { useState } from "react";
+import axios from "axios";
 // import { BASE_URL } from "../config";
 import { AuthServiceProps } from "../@types/auth-service";
 import { useNavigate } from "react-router-dom";
 
 export function useAuthService(): AuthServiceProps {
-
-  const [isLoggedIn, setLoggedIn] = useState<boolean>(true);
   const navigate = useNavigate();
 
-  const login = () => {
+  const login = async (username: string, password: string) => {
     try {
-      return isLoggedIn
-    } catch (error: any) {
-      return error.response.status;
+      const response = await axios.post(
+        "http://localhost:8000/api/user/create_token/",
+        {
+          username,
+          password,
+        },
+        // when using cookies
+        { withCredentials: true }
+      );
+
+      localStorage.setItem("token", response.data["token"]);
+    } catch (err: any) {
+      return err.response.status;
     }
   };
 
   const logout = () => {
     try {
-      setLoggedIn(false)
       navigate("/login");
+      localStorage.removeItem("token");
     } catch (error: any) {
       return error.response.status;
     }
   };
 
-  return { login, logout };
+  const isLoggedIn = () => {
+    if (localStorage.getItem("token")) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  return { login, logout, isLoggedIn };
 }

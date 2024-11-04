@@ -1,18 +1,22 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import useCrud from "../hooks/useCrud";
 import { Button } from "react-bootstrap";
 import { BASE_URL } from "../config";
+import { useAuthServiceContext } from "../context/AuthContext";
 
 const Survey = () => {
-  const [message, SetMessage] = useState("Feed Back Message");
+  const { isLoggedIn } = useAuthServiceContext();
+  const navigate = useNavigate();
 
-  const { dataCRUD, error, isloading, fetchData } = useCrud(
-    [],
-    `/survey/list_survey/`
-  );
+  const { dataCRUD, fetchData } = useCrud([], `/survey/list_survey/`);
 
   useEffect(() => {
-    fetchData();
+    if (!isLoggedIn()) {
+      navigate("/");
+    } else {
+      fetchData();
+    }
   }, []);
 
   return (

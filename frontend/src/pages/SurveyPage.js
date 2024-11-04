@@ -18,7 +18,7 @@ const Home = () => {
 
   const { dataCRUD, error, isloading, fetchData } = useCrud(
     [],
-    `/api/survey/list_survey/?id=${survey_id}`
+    `/survey/list_survey/?id=${survey_id}`
   );
 
   useEffect(() => {
