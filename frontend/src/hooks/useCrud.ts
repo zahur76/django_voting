@@ -1,5 +1,4 @@
 import { useState } from "react";
-import axios from "axios";
 import useAxiosWithTokenInterceptor from "../helpers/jwtinterceptor";
 
 interface IuseCrud<T> {

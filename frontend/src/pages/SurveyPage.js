@@ -7,6 +7,7 @@ import useCrud from "../hooks/useCrud";
 import axios from "axios";
 import { BASE_API } from "../config";
 import { useNavigate } from "react-router-dom";
+import Nav from 'react-bootstrap/Nav';
 
 const Home = () => {
   const [message, setMessage] = useState(null);
@@ -47,7 +48,8 @@ const Home = () => {
 
   return (
     <div>
-      <div className="h1 text-dark text-center montserrat-400">Survey Page</div>
+        <Nav.Link href="/surveys" className="p-2 fw-bold">Home</Nav.Link>
+        <div className="h1 text-dark text-center montserrat-400">Survey Page</div>
       {dataCRUD &&
         dataCRUD.map((data, index) => (
           <div className="text-center h2 text-primary" key={index}>
@@ -105,7 +107,7 @@ const Home = () => {
           </Row>
         )}
       </Formik>
-      <div className="text-center">{message}</div>
+      <div className="text-center text-danger">{message}</div>
     </div>
   );
 };

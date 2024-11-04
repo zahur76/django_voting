@@ -2,18 +2,17 @@ import { useState, useEffect } from "react";
 import useCrud from "../hooks/useCrud";
 import { useNavigate } from "react-router-dom";
 import { useAuthServiceContext } from "../context/AuthContext";
+import Nav from 'react-bootstrap/Nav';
 
 const SurveyResults = () => {
   const { isLoggedIn } = useAuthServiceContext();
   const navigate = useNavigate();
 
-  const [message, setMessage] = useState(null);
-
   const queryParameters = new URLSearchParams(window.location.search);
 
   const survey_id = queryParameters.get("id");
 
-  const { dataCRUD, error, isloading, fetchData } = useCrud(
+  const { dataCRUD, fetchData } = useCrud(
     [],
     `/survey/list_survey/?id=${survey_id}`
   );
@@ -28,6 +27,7 @@ const SurveyResults = () => {
 
   return (
     <div>
+      <Nav.Link href="/surveys" className="p-2 fw-bold">Home</Nav.Link>
       {dataCRUD?.map((data, index) => (
         <div className="text-center h2 text-primary p-3" key={index}>
           {data.title.toUpperCase()} Results
@@ -49,9 +49,6 @@ const SurveyResults = () => {
           </div>
         ))}
       </div>
-
-      <div className="text-center">{message}</div>
-      <ul></ul>
     </div>
   );
 };

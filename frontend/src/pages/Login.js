@@ -6,7 +6,7 @@ import * as Yup from "yup";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { login, isLoggedIn } = useAuthServiceContext();
+  const { login, isLoggedIn, error } = useAuthServiceContext();
   const [errorMessage, setErrorMessage] = useState(null);
 
   // Check if user is already logged in and redirect to surveys page if true
@@ -17,13 +17,13 @@ const Login = () => {
   }, [isLoggedIn, navigate]);
 
   const handleSubmit = (values) => {
-    login(values.username, values.password);
-    if (isLoggedIn()) {
-      navigate("/surveys");
-    } else {
-      setErrorMessage("Error Try again!");
-    }
+    login(values.username, values.password)
+
   };
+
+  useEffect(() => {
+    setErrorMessage(error);
+  }, [error]);
 
   // Creating schema
   const schema = Yup.object().shape({

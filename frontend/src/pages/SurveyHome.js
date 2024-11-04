@@ -6,7 +6,7 @@ import { BASE_URL } from "../config";
 import { useAuthServiceContext } from "../context/AuthContext";
 
 const Survey = () => {
-  const { isLoggedIn } = useAuthServiceContext();
+  const { isLoggedIn, logout } = useAuthServiceContext();
   const navigate = useNavigate();
 
   const { dataCRUD, fetchData } = useCrud([], `/survey/list_survey/`);
@@ -18,6 +18,10 @@ const Survey = () => {
       fetchData();
     }
   }, []);
+
+  const handleLogout = () => {
+    logout();
+  };
 
   return (
     <div>
@@ -57,6 +61,11 @@ const Survey = () => {
           );
         })}
       </ul>
+      <div className="d-flex justify-content-center">
+        <button onClick={handleLogout} className="logout-btn">
+          Logout
+        </button>
+      </div>
     </div>
   );
 };

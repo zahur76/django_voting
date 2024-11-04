@@ -170,6 +170,26 @@
   background: #395591;
 }
 
+.logout-btn {
+  font-family: "Comfortaa", cursive;
+  text-transform: uppercase;
+  outline: 0;
+  background: #4b6cb7;
+  width: 15%;
+  border: 0;
+  border-radius: 5px;
+  padding: 15px;
+  color: #ffffff;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+
+.logout-btn:active {
+  background: #395591;
+}
+
 .form span {
   font-size: 40px;
   color: #4b6cb7;

@@ -1,6 +1,4 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { useAuthService } from "../Services/AuthServices";
 
 const useAxiosWithTokenInterceptor = () => {
   const tokenAxios = axios.create();
