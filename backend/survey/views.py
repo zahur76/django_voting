@@ -36,5 +36,5 @@ def survey_vote(request, survey_id):
 
         return JsonResponse(
             {"status": "false", "detail": "Thanks for voting"},
-            status=status.HTTP_200_OK,
+            status=status.HTTP_201_CREATED,
         )

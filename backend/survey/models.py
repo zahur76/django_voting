@@ -22,7 +22,7 @@ class Survey(BaseModel):
     class Meta:
         verbose_name_plural = "Survey"
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="survey")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="survey")
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     voters = models.IntegerField(default=0)
